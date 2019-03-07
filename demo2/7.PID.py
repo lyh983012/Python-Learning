@@ -8,9 +8,9 @@ class PID_controller(object):
         self.I=0.0
         self.etlast=0.0
         self.et=0.0
-        self.Kp=0.1#P系数,越大稳定越快，越容易失稳,越容易出现定值偏差
-        self.Ki=0.12#I系数，越大稳定越快，系统静差消除时间变长,upwindows用于防发散
-        self.Kd=0.01#d系数,微分环节主要作用是在响应过程中抑制偏差向任何方向的变化，will降低系统抗噪声能力
+        self.Kp=100#P系数,越大稳定越快，越容易失稳,越不易出现定值偏差
+        self.Ki=0.2#I系数，越大稳定越快，系统静差消除时间变长,upwindows用于防发散
+        self.Kd=0.00#d系数,微分环节主要作用是在响应过程中抑制偏差向任何方向的变化，will降低系统抗噪声能力
         self.timeC=1000#1000是个乱写的系数
         self.aim=aim
         self.sample_time = 0.00
@@ -62,11 +62,11 @@ class PID_controller(object):
         return uo
 
 def G(x,i):
-    return x*10
+    return 100/(500*x+1)
 
 if __name__ == '__main__':
 
-    plt.axis([0, 2000, 0, 100])
+    plt.axis([0, 2000, 0, 1000])
     ui=0
     controller=PID_controller(0)
     controller.aim = 10

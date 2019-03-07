@@ -1,8 +1,4 @@
-#coding=utf-8
-
-#!/usr/bin/python
 from functools import reduce
-
 import numpy as np
 print (np.version.version)
 

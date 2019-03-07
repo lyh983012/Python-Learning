@@ -7,9 +7,9 @@ import image_loader as il
 from multiprocessing import Pool
 import os, time
 
-rate =10
-beta=0.9
-dropout=0.9
+rate =0.9
+beta=1
+dropout=1
 count = 0
 layer_count = 3
 
@@ -65,11 +65,19 @@ for i in range(len(temp2)):
 print(datas)
 
 def f0(x):
+    if x>=0:
+        return x
+    else:
+        return 0
     #return 1/(1+np.exp(-x))
-    return np.tanh(x)
+    #return np.tanh(x)
 def df0(x):
+    if x >= 0:
+        return 1
+    else:
+        return 0
     #return f0(x)*(1-f0(x))
-    return 1-f0(x)*f0(x)
+    #return 1-f0(x)*f0(x)
 def caloutput(x,y):
     return x+y.weight*y.upnode.output
 def caldelta(x,y):
@@ -295,7 +303,7 @@ if __name__ == '__main__':
 
     plt.axis([0, 1000, 0, 0.00001])
     #########数据归一化
-    mynet = net(layer_count, (len(datas[0][0]), 25, len(datas[0][1])))
+    mynet = net(layer_count, (784,562,10))
     count1=0
     mynet.get_data(datas)
     print(mynet)
@@ -309,11 +317,7 @@ if __name__ == '__main__':
              time_end = time.time()
              print('totally cost', time_end - time_start)
              break
-    plt.clf()
-    plt.show()
-    x=np.linspace(900,1100,100)
-    y = (mynet.predict(((x / 1000 - 1)*5,(x / 1000 - 1)*5)) * 180)
-    plt.plot(x, y,'.')
-    plt.show()
+
+
 
 
