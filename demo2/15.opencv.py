@@ -18,10 +18,13 @@ def find_hand(frame):
     hand_cascade = cv2.CascadeClassifier('/Users/lyh/Desktop/挑战杯/Opencv-master/haarcascade/cascade.xml')
     hands=hand_cascade.detectMultiScale(gray,1.1,10,cv2.CASCADE_SCALE_IMAGE)
     print(hands)
-    if len(hands)>0:
-        (x, y, w, h)=hands[0]
+    (c, r, w, h)=(0,0,0,0)
+    for hand in hands:
+        (c, r, w, h)=hand
+        x=c
+        y=r
         cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
-        c, r, w, h = hands[0][0],hands[0][1],hands[0][2],hands[0][3]
+    if hands is not []:
         return (c, r, w, h , frame)
     else:
         return []
