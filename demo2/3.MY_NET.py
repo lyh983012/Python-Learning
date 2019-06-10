@@ -148,7 +148,7 @@ class connection(object):
 
 
     def cal_weight(self):
-        self.gra = self.downnode.delta * self.upnode.output
+        self.gra = self.downnode.delta * self.upnode.output #！！！！！！！！！！！！！！！！！！
         self.v1=beta*self.v1+(1-beta)*self.gra
         self.weight=self.weight+rate*self.v1
         if ((random.uniform(0,1)>dropout)):
