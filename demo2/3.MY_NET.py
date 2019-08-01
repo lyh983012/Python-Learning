@@ -1,7 +1,7 @@
 import random
 import numpy as np
 import image_loader as loader
-import malplotlib as plot
+import matplotlib as plot
 from functools import reduce
 import time
 
